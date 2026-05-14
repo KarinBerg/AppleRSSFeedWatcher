@@ -1,0 +1,578 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		170D99E32FB6049B00168CAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 170D99CD2FB6049A00168CAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 170D99D42FB6049A00168CAA;
+			remoteInfo = AppleRSSFeedWatcher;
+		};
+		170D99ED2FB6049B00168CAA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 170D99CD2FB6049A00168CAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 170D99D42FB6049A00168CAA;
+			remoteInfo = AppleRSSFeedWatcher;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		170D99D52FB6049A00168CAA /* AppleRSSFeedWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleRSSFeedWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		170D99E22FB6049B00168CAA /* AppleRSSFeedWatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppleRSSFeedWatcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		170D99EC2FB6049B00168CAA /* AppleRSSFeedWatcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppleRSSFeedWatcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		170D99D72FB6049A00168CAA /* AppleRSSFeedWatcher */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AppleRSSFeedWatcher;
+			sourceTree = "<group>";
+		};
+		170D99E52FB6049B00168CAA /* AppleRSSFeedWatcherTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AppleRSSFeedWatcherTests;
+			sourceTree = "<group>";
+		};
+		170D99EF2FB6049B00168CAA /* AppleRSSFeedWatcherUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AppleRSSFeedWatcherUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		170D99D22FB6049A00168CAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		170D99DF2FB6049B00168CAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		170D99E92FB6049B00168CAA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		170D99CC2FB6049A00168CAA = {
+			isa = PBXGroup;
+			children = (
+				170D99D72FB6049A00168CAA /* AppleRSSFeedWatcher */,
+				170D99E52FB6049B00168CAA /* AppleRSSFeedWatcherTests */,
+				170D99EF2FB6049B00168CAA /* AppleRSSFeedWatcherUITests */,
+				170D99D62FB6049A00168CAA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		170D99D62FB6049A00168CAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				170D99D52FB6049A00168CAA /* AppleRSSFeedWatcher.app */,
+				170D99E22FB6049B00168CAA /* AppleRSSFeedWatcherTests.xctest */,
+				170D99EC2FB6049B00168CAA /* AppleRSSFeedWatcherUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		170D99D42FB6049A00168CAA /* AppleRSSFeedWatcher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 170D99F62FB6049B00168CAA /* Build configuration list for PBXNativeTarget "AppleRSSFeedWatcher" */;
+			buildPhases = (
+				170D99D12FB6049A00168CAA /* Sources */,
+				170D99D22FB6049A00168CAA /* Frameworks */,
+				170D99D32FB6049A00168CAA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				170D99D72FB6049A00168CAA /* AppleRSSFeedWatcher */,
+			);
+			name = AppleRSSFeedWatcher;
+			packageProductDependencies = (
+			);
+			productName = AppleRSSFeedWatcher;
+			productReference = 170D99D52FB6049A00168CAA /* AppleRSSFeedWatcher.app */;
+			productType = "com.apple.product-type.application";
+		};
+		170D99E12FB6049B00168CAA /* AppleRSSFeedWatcherTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 170D99F92FB6049B00168CAA /* Build configuration list for PBXNativeTarget "AppleRSSFeedWatcherTests" */;
+			buildPhases = (
+				170D99DE2FB6049B00168CAA /* Sources */,
+				170D99DF2FB6049B00168CAA /* Frameworks */,
+				170D99E02FB6049B00168CAA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				170D99E42FB6049B00168CAA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				170D99E52FB6049B00168CAA /* AppleRSSFeedWatcherTests */,
+			);
+			name = AppleRSSFeedWatcherTests;
+			packageProductDependencies = (
+			);
+			productName = AppleRSSFeedWatcherTests;
+			productReference = 170D99E22FB6049B00168CAA /* AppleRSSFeedWatcherTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		170D99EB2FB6049B00168CAA /* AppleRSSFeedWatcherUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 170D99FC2FB6049B00168CAA /* Build configuration list for PBXNativeTarget "AppleRSSFeedWatcherUITests" */;
+			buildPhases = (
+				170D99E82FB6049B00168CAA /* Sources */,
+				170D99E92FB6049B00168CAA /* Frameworks */,
+				170D99EA2FB6049B00168CAA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				170D99EE2FB6049B00168CAA /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				170D99EF2FB6049B00168CAA /* AppleRSSFeedWatcherUITests */,
+			);
+			name = AppleRSSFeedWatcherUITests;
+			packageProductDependencies = (
+			);
+			productName = AppleRSSFeedWatcherUITests;
+			productReference = 170D99EC2FB6049B00168CAA /* AppleRSSFeedWatcherUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		170D99CD2FB6049A00168CAA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2650;
+				LastUpgradeCheck = 2650;
+				TargetAttributes = {
+					170D99D42FB6049A00168CAA = {
+						CreatedOnToolsVersion = 26.5;
+					};
+					170D99E12FB6049B00168CAA = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 170D99D42FB6049A00168CAA;
+					};
+					170D99EB2FB6049B00168CAA = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 170D99D42FB6049A00168CAA;
+					};
+				};
+			};
+			buildConfigurationList = 170D99D02FB6049A00168CAA /* Build configuration list for PBXProject "AppleRSSFeedWatcher" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 170D99CC2FB6049A00168CAA;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 170D99D62FB6049A00168CAA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				170D99D42FB6049A00168CAA /* AppleRSSFeedWatcher */,
+				170D99E12FB6049B00168CAA /* AppleRSSFeedWatcherTests */,
+				170D99EB2FB6049B00168CAA /* AppleRSSFeedWatcherUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		170D99D32FB6049A00168CAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		170D99E02FB6049B00168CAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		170D99EA2FB6049B00168CAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		170D99D12FB6049A00168CAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		170D99DE2FB6049B00168CAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		170D99E82FB6049B00168CAA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		170D99E42FB6049B00168CAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 170D99D42FB6049A00168CAA /* AppleRSSFeedWatcher */;
+			targetProxy = 170D99E32FB6049B00168CAA /* PBXContainerItemProxy */;
+		};
+		170D99EE2FB6049B00168CAA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 170D99D42FB6049A00168CAA /* AppleRSSFeedWatcher */;
+			targetProxy = 170D99ED2FB6049B00168CAA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		170D99F42FB6049B00168CAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = FW7Z27RMMT;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		170D99F52FB6049B00168CAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = FW7Z27RMMT;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		170D99F72FB6049B00168CAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FW7Z27RMMT;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = de.pepperApps.AppleRSSFeedWatcher;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		170D99F82FB6049B00168CAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FW7Z27RMMT;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = de.pepperApps.AppleRSSFeedWatcher;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		170D99FA2FB6049B00168CAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FW7Z27RMMT;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = de.pepperApps.AppleRSSFeedWatcherTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppleRSSFeedWatcher.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AppleRSSFeedWatcher";
+			};
+			name = Debug;
+		};
+		170D99FB2FB6049B00168CAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FW7Z27RMMT;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = de.pepperApps.AppleRSSFeedWatcherTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppleRSSFeedWatcher.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AppleRSSFeedWatcher";
+			};
+			name = Release;
+		};
+		170D99FD2FB6049B00168CAA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FW7Z27RMMT;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = de.pepperApps.AppleRSSFeedWatcherUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = AppleRSSFeedWatcher;
+			};
+			name = Debug;
+		};
+		170D99FE2FB6049B00168CAA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FW7Z27RMMT;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = de.pepperApps.AppleRSSFeedWatcherUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = AppleRSSFeedWatcher;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		170D99D02FB6049A00168CAA /* Build configuration list for PBXProject "AppleRSSFeedWatcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				170D99F42FB6049B00168CAA /* Debug */,
+				170D99F52FB6049B00168CAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		170D99F62FB6049B00168CAA /* Build configuration list for PBXNativeTarget "AppleRSSFeedWatcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				170D99F72FB6049B00168CAA /* Debug */,
+				170D99F82FB6049B00168CAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		170D99F92FB6049B00168CAA /* Build configuration list for PBXNativeTarget "AppleRSSFeedWatcherTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				170D99FA2FB6049B00168CAA /* Debug */,
+				170D99FB2FB6049B00168CAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		170D99FC2FB6049B00168CAA /* Build configuration list for PBXNativeTarget "AppleRSSFeedWatcherUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				170D99FD2FB6049B00168CAA /* Debug */,
+				170D99FE2FB6049B00168CAA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 170D99CD2FB6049A00168CAA /* Project object */;
+}
