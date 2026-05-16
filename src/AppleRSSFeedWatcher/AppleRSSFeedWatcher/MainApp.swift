@@ -7,14 +7,17 @@
 
 import SwiftUI
 
+let rssLink: String = "https://developer.apple.com/news/releases/rss/releases.rss"
+
 @main
 struct MainApp: App {
+  private let parser = FeedParser(feedUrl: URL(string: rssLink)!)
+
   var body: some Scene {
     MenuBarExtra(
       "Apple RSS Feed",
       systemImage: "wifi.square"
     ) {
-      let parser = FeedParser(feedUrl: URL(string: "https://developer.apple.com/news/releases/rss/releases.rss")!)
       FeedView(feedParser: parser)
     }
     .menuBarExtraStyle(.window)

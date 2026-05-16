@@ -67,20 +67,20 @@ struct FeedView: View {
       Divider()
     }
     .frame(minWidth: 500, minHeight: 400)
-    .onAppear {
-      Task {
-        await viewModel.loadFeed()
-      }
-    }
   }
 
   init(feedParser: FeedParser) {
     let viewModel = FeedViewModel(feedParser: feedParser)
     _viewModel = StateObject(wrappedValue: viewModel)
+
+    // Initial load of the RSS feed data at app start
+    Task { @MainActor in
+      await viewModel.loadFeed()
+    }
   }
 
 }
 
 #Preview {
-  FeedView(feedParser: FeedParser(feedUrl: URL(string: "https://developer.apple.com/news/releases/rss/releases.rss")!))
+  FeedView(feedParser: FeedParser(feedUrl: URL(string: rssLink)!))
 }
