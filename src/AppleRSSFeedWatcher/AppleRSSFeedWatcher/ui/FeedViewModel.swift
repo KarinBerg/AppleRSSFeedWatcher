@@ -13,11 +13,17 @@ class FeedViewModel: ObservableObject {
   @Published var isLoading = false
   @Published var errorMessage: String?
   @Published var itemFilter: ItemFilter = .all
+  @Published var lastFetchDate: Date?
 
   private let feedParser: FeedParser
+  private var refreshTask: Task<Void, Never>?
 
   init(feedParser: FeedParser) {
     self.feedParser = feedParser
+  }
+
+  deinit {
+    refreshTask?.cancel()
   }
 
   func loadFeed() async {
@@ -29,8 +35,23 @@ class FeedViewModel: ObservableObject {
 
     do {
       feedItems = try await feedParser.load()
+      lastFetchDate = Date()
     } catch {
       errorMessage = error.localizedDescription
+    }
+  }
+
+  func startAutoRefresh(interval: TimeInterval = rssRefreshInterval) {
+    refreshTask?.cancel()
+    refreshTask = Task { @MainActor [weak self] in
+      while !Task.isCancelled {
+        await self?.loadFeed()
+        do {
+          try await Task.sleep(for: .seconds(interval))
+        } catch {
+          return
+        }
+      }
     }
   }
 }

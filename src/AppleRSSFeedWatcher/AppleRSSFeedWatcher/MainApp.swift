@@ -8,6 +8,7 @@
 import SwiftUI
 
 let rssLink: String = "https://developer.apple.com/news/releases/rss/releases.rss"
+let rssRefreshInterval: TimeInterval = 60 * 60
 
 @main
 struct MainApp: App {

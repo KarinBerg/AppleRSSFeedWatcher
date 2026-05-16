@@ -65,6 +65,32 @@ struct FeedView: View {
       }
 
       Divider()
+
+      HStack {
+        if let lastFetchDate = viewModel.lastFetchDate {
+          Text("Content from: \(lastFetchDate.formatted(date: .abbreviated, time: .shortened))")
+        } else {
+          Text("Not yet updated")
+        }
+        if viewModel.isLoading {
+          ProgressView()
+            .controlSize(.small)
+        }
+        Spacer()
+        Button {
+          Task { @MainActor in
+            await viewModel.loadFeed()
+          }
+        } label: {
+          Image(systemName: "arrow.clockwise")
+        }
+        .buttonStyle(.borderless)
+        .foregroundColor(Color(.labelColor))
+        .disabled(viewModel.isLoading)
+      }
+      .font(.default)
+      .foregroundColor(.secondary)
+      .padding()
     }
     .frame(minWidth: 500, minHeight: 400)
   }
@@ -73,10 +99,8 @@ struct FeedView: View {
     let viewModel = FeedViewModel(feedParser: feedParser)
     _viewModel = StateObject(wrappedValue: viewModel)
 
-    // Initial load of the RSS feed data at app start
-    Task { @MainActor in
-      await viewModel.loadFeed()
-    }
+    // Start hourly background refresh of the RSS feed
+    viewModel.startAutoRefresh()
   }
 
 }
