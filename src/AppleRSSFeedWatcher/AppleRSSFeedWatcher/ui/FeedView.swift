@@ -33,20 +33,9 @@ struct FeedView: View {
         .buttonStyle(.borderless)
         .foregroundColor(Color(.labelColor))
 
-        // PreferencesButton
-        Button {
-        } label: {
-          Image(systemName: "gear")
-        }
-        .buttonStyle(.borderless)
-        .foregroundColor(Color(.labelColor))
+        Spacer()
 
-        Button(
-          "Exit",
-          action: {
-            NSApp.terminate(nil)
-          }
-        )
+        OptionButtonView()
       }
       .padding()
 
@@ -92,7 +81,7 @@ struct FeedView: View {
       .foregroundColor(.secondary)
       .padding()
     }
-    .frame(minWidth: 500, minHeight: 400)
+    .frame(minWidth: 300, minHeight: 400)
   }
 
   init(feedParser: FeedParser) {
