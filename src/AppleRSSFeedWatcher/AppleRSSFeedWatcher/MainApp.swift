@@ -17,7 +17,7 @@ struct MainApp: App {
   var body: some Scene {
     MenuBarExtra(
       "Apple RSS Feed",
-      systemImage: "wifi.square"
+      image: "StatusBarIcon"
     ) {
       FeedView(feedParser: parser)
     }
