@@ -14,31 +14,7 @@ struct FeedView: View {
 
   var body: some View {
     VStack(alignment: .center, spacing: 0) {
-      HStack(alignment: .center, spacing: 16) {
-        Picker("Select Filter", selection: $viewModel.itemFilter) {
-          ForEach(ItemFilter.allCases, id: \.self) {
-            Text($0.description)
-          }
-        }
-        .pickerStyle(.segmented)
-        .labelsHidden()
-
-        // SearchButton
-        Button {
-          print("Search")
-        } label: {
-          Image(systemName: "magnifyingglass")
-            .imageScale(.medium)
-            .labelStyle(.iconOnly)
-        }
-        .buttonStyle(.borderless)
-        .foregroundColor(Color(.labelColor))
-
-        Spacer()
-
-        OptionMenuButtonView()
-      }
-      .padding()
+      FeedToolbarView(viewModel: viewModel)
 
       Divider()
 
