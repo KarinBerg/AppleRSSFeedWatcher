@@ -36,7 +36,7 @@ struct FeedView: View {
 
         Spacer()
 
-        OptionButtonView()
+        OptionMenuButtonView()
       }
       .padding()
 

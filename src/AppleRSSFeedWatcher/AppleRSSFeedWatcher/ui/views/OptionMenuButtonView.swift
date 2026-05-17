@@ -1,5 +1,5 @@
 //
-//  OptionButton.swift
+//  OptionMenuButtonView.swift
 //  AppleRSSFeedWatcher
 //
 //  Created by Karin Berg on 16.05.26.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OptionButtonView: View {
+struct OptionMenuButtonView: View {
   var body: some View {
     Menu {
       Button("About...") {
@@ -83,5 +83,5 @@ struct OptionButtonView: View {
 }
 
 #Preview {
-  OptionButtonView()
+  OptionMenuButtonView()
 }
