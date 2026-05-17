@@ -42,18 +42,7 @@ struct FeedView: View {
 
       Divider()
 
-      if viewModel.feedItems.isEmpty {
-        Text("No releases available")
-          .frame(maxWidth: .infinity, maxHeight: .infinity)
-          .background(Color(.textBackgroundColor))
-      } else {
-        List {
-          ForEach(viewModel.feedItems) { item in
-            FeedItemView(item: item)
-              .listRowSeparator(.hidden)
-          }
-        }
-      }
+      FeedListView(items: viewModel.feedItems)
 
       Divider()
 
@@ -79,7 +68,7 @@ struct FeedView: View {
         .foregroundColor(Color(.labelColor))
         .disabled(viewModel.isLoading)
       }
-      .font(.default)
+      .font(.title)
       .foregroundColor(.secondary)
       .padding()
     }
