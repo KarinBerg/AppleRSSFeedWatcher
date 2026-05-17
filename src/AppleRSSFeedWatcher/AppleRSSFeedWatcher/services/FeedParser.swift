@@ -8,30 +8,6 @@
 import FeedKit
 import Foundation
 
-struct FeedItem: Identifiable {
-  public let id: String
-  let title: String?
-  let link: String?
-  let description: String?
-  let pubDate: Date?
-
-  init(item: RSSFeedItem) {
-    self.id = item.guid.debugDescription
-    self.title = item.title
-    self.link = item.link
-    self.description = item.description
-    self.pubDate = item.pubDate
-  }
-
-  init(id: String, title: String, link: String?, description: String?, pubDate: Date?) {
-    self.id = id
-    self.title = title
-    self.link = link
-    self.description = description
-    self.pubDate = pubDate
-  }
-}
-
 class FeedParser {
   private let feedUrl: URL
 
@@ -43,10 +19,22 @@ class FeedParser {
     var items: [FeedItem] = []
     let feed = try await RSSFeed(urlString: self.feedUrl.absoluteString)
     feed.channel?.items?.forEach { item in
-      items.append(FeedItem(item: item))
-
+      items.append(FeedItem.fromRssFeedItem(item: item))
     }
     return items
   }
 
+}
+
+extension FeedItem {
+
+  static func fromRssFeedItem(item: RSSFeedItem) -> Self {
+    Self(
+      id: item.guid.debugDescription,
+      title: item.title ?? "",
+      link: item.link,
+      description: item.description,
+      pubDate: item.pubDate
+    )
+  }
 }
