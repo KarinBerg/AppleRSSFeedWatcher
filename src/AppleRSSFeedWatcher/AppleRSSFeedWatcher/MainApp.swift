@@ -22,5 +22,9 @@ struct MainApp: App {
       FeedView(feedParser: parser)
     }
     .menuBarExtraStyle(.window)
+
+    Settings {
+      SettingsView()
+    }
   }
 }

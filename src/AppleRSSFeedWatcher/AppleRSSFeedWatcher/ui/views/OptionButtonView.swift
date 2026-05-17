@@ -5,12 +5,9 @@
 //  Created by Karin Berg on 16.05.26.
 //
 
-import ServiceManagement
 import SwiftUI
 
 struct OptionButtonView: View {
-  @State private var launchAtLogin: Bool = SMAppService.mainApp.status == .enabled
-
   var body: some View {
     Menu {
       Button("About...") {
@@ -58,32 +55,14 @@ struct OptionButtonView: View {
         ])
       }
 
-      Button("Settings...") {
-        print("Settings")
+      SettingsLink {
+        Text("Settings...")
       }
       .keyboardShortcut(",", modifiers: .command)
-
-      Toggle(
-        "Launch at Login",
-        isOn: Binding(
-          get: { launchAtLogin },
-          set: { newValue in
-            do {
-              if newValue {
-                print("onChange: register")
-                try SMAppService.mainApp.register()
-              } else {
-                print("onChange: unregister")
-                try SMAppService.mainApp.unregister()
-              }
-              launchAtLogin = newValue
-              print("onChange: launchAtLogin: \(launchAtLogin)")
-            } catch {
-              print("Failed to update launch at login: \(error)")
-              launchAtLogin = SMAppService.mainApp.status == .enabled
-            }
-          }
-        )
+      .simultaneousGesture(
+        TapGesture().onEnded {
+          NSApp.activate(ignoringOtherApps: true)
+        }
       )
 
       Divider()
@@ -100,14 +79,6 @@ struct OptionButtonView: View {
     .menuIndicator(.hidden)
     .foregroundColor(Color(.labelColor))
     .fixedSize()
-    .onAppear {
-      if SMAppService.mainApp.status == .enabled {
-        launchAtLogin = true
-      } else {
-        launchAtLogin = false
-      }
-      print("OnAppear: launchAtLogin: \(launchAtLogin)")
-    }
   }
 }
 

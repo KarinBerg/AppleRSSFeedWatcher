@@ -10,6 +10,7 @@ import os.log
 
 struct FeedView: View {
   @StateObject private var viewModel: FeedViewModel
+  @AppStorage(SettingsKey.refreshInterval) private var refreshInterval: TimeInterval = rssRefreshInterval
 
   var body: some View {
     VStack(alignment: .center) {
@@ -82,14 +83,18 @@ struct FeedView: View {
       .padding()
     }
     .frame(minWidth: 300, minHeight: 400)
+    .onChange(of: refreshInterval) { _, newValue in
+      viewModel.startAutoRefresh(interval: newValue)
+    }
   }
 
   init(feedParser: FeedParser) {
     let viewModel = FeedViewModel(feedParser: feedParser)
     _viewModel = StateObject(wrappedValue: viewModel)
 
-    // Start hourly background refresh of the RSS feed
-    viewModel.startAutoRefresh()
+    let storedInterval = UserDefaults.standard.double(forKey: SettingsKey.refreshInterval)
+    let interval = storedInterval > 0 ? storedInterval : rssRefreshInterval
+    viewModel.startAutoRefresh(interval: interval)
   }
 
 }
