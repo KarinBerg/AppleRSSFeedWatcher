@@ -32,7 +32,7 @@ struct FeedToolbarView: View {
 
       Spacer()
 
-      OptionMenuButtonView()
+      OptionMenuButton()
     }
     .padding()
   }
