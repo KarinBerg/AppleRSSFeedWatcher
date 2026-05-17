@@ -50,6 +50,7 @@ struct FeedView: View {
         List {
           ForEach(viewModel.feedItems) { item in
             FeedItemView(item: item)
+              .listRowSeparator(.hidden)
           }
         }
       }
