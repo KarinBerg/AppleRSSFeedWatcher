@@ -13,7 +13,7 @@ struct FeedView: View {
   @AppStorage(SettingsKey.refreshInterval) private var refreshInterval: TimeInterval = rssRefreshInterval
 
   var body: some View {
-    VStack(alignment: .center) {
+    VStack(alignment: .center, spacing: 0) {
       HStack(alignment: .center, spacing: 16) {
         Picker("Select Filter", selection: $viewModel.itemFilter) {
           ForEach(ItemFilter.allCases, id: \.self) {
