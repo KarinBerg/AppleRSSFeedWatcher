@@ -46,31 +46,7 @@ struct FeedView: View {
 
       Divider()
 
-      HStack {
-        if let lastFetchDate = viewModel.lastFetchDate {
-          Text("Content from: \(lastFetchDate.formatted(date: .abbreviated, time: .shortened))")
-        } else {
-          Text("Not yet updated")
-        }
-        if viewModel.isLoading {
-          ProgressView()
-            .controlSize(.small)
-        }
-        Spacer()
-        Button {
-          Task { @MainActor in
-            await viewModel.loadFeed()
-          }
-        } label: {
-          Image(systemName: "arrow.clockwise")
-        }
-        .buttonStyle(.borderless)
-        .foregroundColor(Color(.labelColor))
-        .disabled(viewModel.isLoading)
-      }
-      .font(.title)
-      .foregroundColor(.secondary)
-      .padding()
+      FeedStatusBarView(viewModel: viewModel)
     }
     .frame(minWidth: 300, minHeight: 400)
     .onChange(of: refreshInterval) { _, newValue in
