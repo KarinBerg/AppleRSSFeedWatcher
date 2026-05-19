@@ -18,7 +18,7 @@ struct FeedView: View {
 
       Divider()
 
-      FeedListView(items: viewModel.feedItems)
+      FeedListView(items: viewModel.filteredItems)
 
       Divider()
 

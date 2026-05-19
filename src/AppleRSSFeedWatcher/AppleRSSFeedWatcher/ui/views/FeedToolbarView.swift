@@ -9,16 +9,20 @@ import SwiftUI
 
 struct FeedToolbarView: View {
   @ObservedObject var viewModel: FeedViewModel
+  @State var itemFilter: ItemFilter = .all
 
   var body: some View {
     HStack(alignment: .center, spacing: 16) {
-      Picker("Select Filter", selection: $viewModel.itemFilter) {
-        ForEach(ItemFilter.allCases, id: \.self) {
-          Text($0.description)
+      Picker("Select Filter", selection: $itemFilter) {
+        ForEach(ItemFilter.allCases, id: \.self) { filter in
+          Text(filter.description).tag(filter)
         }
       }
       .pickerStyle(.segmented)
       .labelsHidden()
+      .onChange(of: itemFilter) { _, filter in
+        viewModel.itemFilter = filter
+      }
 
       Button {
         print("Search")

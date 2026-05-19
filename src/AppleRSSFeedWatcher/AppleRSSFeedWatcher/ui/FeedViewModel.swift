@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 class FeedViewModel: ObservableObject {
-  @Published var feedItems: [FeedItem] = []
+  @Published private var feedItems: [FeedItem] = []
   @Published var isLoading = false
   @Published var errorMessage: String?
   @Published var itemFilter: ItemFilter = .all
@@ -17,6 +17,17 @@ class FeedViewModel: ObservableObject {
 
   private let feedParser: FeedParser
   private var refreshTask: Task<Void, Never>?
+
+  var filteredItems: [FeedItem] {
+    switch itemFilter {
+    case .all:
+      return feedItems
+    case .beta:
+      return feedItems.filter { $0.isBeta || $0.isReleaseCandidate }
+    case .release:
+      return feedItems.filter { $0.isRelease }
+    }
+  }
 
   init(feedParser: FeedParser) {
     self.feedParser = feedParser
