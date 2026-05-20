@@ -15,6 +15,9 @@ struct SettingsView: View {
   var body: some View {
     Form {
       Picker("Refresh feed every:", selection: $refreshInterval) {
+        #if DEBUG
+        Text("1 minute").tag(TimeInterval(60))
+        #endif
         Text("15 minutes").tag(TimeInterval(15 * 60))
         Text("30 minutes").tag(TimeInterval(30 * 60))
         Text("1 hour").tag(TimeInterval(60 * 60))

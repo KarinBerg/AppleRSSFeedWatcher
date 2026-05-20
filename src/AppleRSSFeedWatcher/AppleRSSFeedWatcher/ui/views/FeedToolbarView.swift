@@ -43,5 +43,5 @@ struct FeedToolbarView: View {
 }
 
 #Preview {
-  FeedToolbarView(viewModel: FeedViewModel(feedParser: FeedParser(feedUrl: URL(string: rssLink)!)))
+  FeedToolbarView(viewModel: FeedViewModel(provider: FeedProvider(feedParser: FeedParser(feedUrl: URL(string: rssLink)!))))
 }

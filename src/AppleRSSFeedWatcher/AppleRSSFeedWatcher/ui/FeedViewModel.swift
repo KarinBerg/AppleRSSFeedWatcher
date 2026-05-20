@@ -8,62 +8,36 @@
 import Combine
 import Foundation
 
-class FeedViewModel: ObservableObject {
-  @Published private var feedItems: [FeedItem] = []
-  @Published var isLoading = false
-  @Published var errorMessage: String?
+final class FeedViewModel: ObservableObject {
   @Published var itemFilter: ItemFilter = .all
-  @Published var lastFetchDate: Date?
 
-  private let feedParser: FeedParser
-  private var refreshTask: Task<Void, Never>?
+  private let provider: FeedProvider
+  private var cancellable: AnyCancellable?
+
+  init(provider: FeedProvider) {
+    self.provider = provider
+    self.cancellable = provider.objectWillChange.sink { [weak self] _ in
+      self?.objectWillChange.send()
+    }
+  }
 
   var filteredItems: [FeedItem] {
     switch itemFilter {
     case .all:
-      return feedItems
+      return provider.feedItems
     case .beta:
-      return feedItems.filter { $0.isBeta || $0.isReleaseCandidate }
+      return provider.feedItems.filter { $0.isBeta || $0.isReleaseCandidate }
     case .release:
-      return feedItems.filter { $0.isRelease }
+      return provider.feedItems.filter { $0.isRelease }
     }
   }
 
-  init(feedParser: FeedParser) {
-    self.feedParser = feedParser
-  }
-
-  deinit {
-    refreshTask?.cancel()
-  }
+  var isLoading: Bool { provider.isLoading }
+  var errorMessage: String? { provider.errorMessage }
+  var lastFetchDate: Date? { provider.lastFetchDate }
 
   func loadFeed() async {
-    isLoading = true
-
-    defer {
-      isLoading = false
-    }
-
-    do {
-      feedItems = try await feedParser.load()
-      lastFetchDate = Date()
-    } catch {
-      errorMessage = error.localizedDescription
-    }
-  }
-
-  func startAutoRefresh(interval: TimeInterval = rssRefreshInterval) {
-    refreshTask?.cancel()
-    refreshTask = Task { @MainActor [weak self] in
-      while !Task.isCancelled {
-        await self?.loadFeed()
-        do {
-          try await Task.sleep(for: .seconds(interval))
-        } catch {
-          return
-        }
-      }
-    }
+    await provider.refresh()
   }
 }
 

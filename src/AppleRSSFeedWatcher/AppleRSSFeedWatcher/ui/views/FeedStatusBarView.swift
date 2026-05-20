@@ -45,5 +45,5 @@ struct FeedStatusBarView: View {
 }
 
 #Preview {
-  FeedStatusBarView(viewModel: FeedViewModel(feedParser: FeedParser(feedUrl: URL(string: rssLink)!)))
+  FeedStatusBarView(viewModel: FeedViewModel(provider: FeedProvider(feedParser: FeedParser(feedUrl: URL(string: rssLink)!))))
 }
