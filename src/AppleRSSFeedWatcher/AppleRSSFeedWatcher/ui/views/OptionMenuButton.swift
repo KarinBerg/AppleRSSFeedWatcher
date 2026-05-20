@@ -12,44 +12,7 @@ struct OptionMenuButton: View {
     Menu {
       Button("About...") {
         NSApp.activate(ignoringOtherApps: true)
-
-        let credits = NSMutableAttributedString(
-          string: "This app watches the official ",
-          attributes: [.foregroundColor: NSColor.labelColor]
-        )
-        credits.append(
-          NSAttributedString(
-            string: "Apple Developer releases RSS feed",
-            attributes: [
-              .link: URL(string: "https://developer.apple.com/news/releases/")!,
-              .foregroundColor: NSColor.linkColor,
-            ]
-          )
-        )
-        credits.append(
-          NSAttributedString(
-            string: " and notifies you of new releases. Collected content is not modified in any way and copyrights belongs to Apple Inc.\n\n",
-            attributes: [.foregroundColor: NSColor.labelColor]
-          )
-        )
-        credits.append(
-          NSAttributedString(string: "Copyright © 2026 Karin Berg. All rights reserved.\n\n", attributes: [.foregroundColor: NSColor.labelColor])
-        )
-
-        credits.append(
-          NSAttributedString(string: "Report issues to ", attributes: [.foregroundColor: NSColor.labelColor])
-        )
-
-        credits.append(
-          NSAttributedString(
-            string: "github.com",
-            attributes: [
-              .link: URL(string: "https://github.com/KarinBerg/AppleRSSFeedWatcher/issues")!,
-              .foregroundColor: NSColor.linkColor,
-            ]
-          )
-        )
-
+        let credits = getAboutPanelCredits()
         NSApp.orderFrontStandardAboutPanel(options: [
           .credits: credits
         ])
@@ -61,7 +24,7 @@ struct OptionMenuButton: View {
       .keyboardShortcut(",", modifiers: .command)
       .simultaneousGesture(
         TapGesture().onEnded {
-          NSApp.activate(ignoringOtherApps: true)
+          NSApp.activate(ignoringOtherApps: true) 
         }
       )
 
@@ -80,6 +43,51 @@ struct OptionMenuButton: View {
     .foregroundColor(Color(.labelColor))
     .fixedSize()
   }
+
+  private func getAboutPanelCredits() -> NSAttributedString {
+    let credits = NSMutableAttributedString(
+      string: "This app watches the official ",
+      attributes: [.foregroundColor: NSColor.labelColor]
+    )
+
+    credits.append(
+      NSAttributedString(
+        string: "Apple Developer releases RSS feed",
+        attributes: [
+          .link: URL(string: "https://developer.apple.com/news/releases/")!,
+          .foregroundColor: NSColor.linkColor,
+        ]
+      )
+    )
+
+    credits.append(
+      NSAttributedString(
+        string: " and notifies you of new releases. Collected content is not modified in any way and copyrights belongs to Apple Inc.\n\n",
+        attributes: [.foregroundColor: NSColor.labelColor]
+      )
+    )
+
+    credits.append(
+      NSAttributedString(string: "Copyright © 2026 Karin Berg. All rights reserved.\n\n", attributes: [.foregroundColor: NSColor.labelColor])
+    )
+
+    credits.append(
+      NSAttributedString(string: "Report issues to ", attributes: [.foregroundColor: NSColor.labelColor])
+    )
+
+    credits.append(
+      NSAttributedString(
+        string: "github.com",
+        attributes: [
+          .link: URL(string: "https://github.com/KarinBerg/AppleRSSFeedWatcher/issues")!,
+          .foregroundColor: NSColor.linkColor,
+        ]
+      )
+    )
+
+    return credits
+  }
+
 }
 
 #Preview {
