@@ -10,6 +10,7 @@ import Foundation
 
 final class FeedViewModel: ObservableObject {
   @Published var itemFilter: ItemFilter = .all
+  @Published var searchText: String = ""
 
   private let provider: FeedProvider
   private var cancellable: AnyCancellable?
@@ -22,14 +23,20 @@ final class FeedViewModel: ObservableObject {
   }
 
   var filteredItems: [FeedItem] {
+    let filtered: [FeedItem]
     switch itemFilter {
     case .all:
-      return provider.feedItems
+      filtered = provider.feedItems
     case .beta:
-      return provider.feedItems.filter { $0.isBeta || $0.isReleaseCandidate }
+      filtered = provider.feedItems.filter { $0.isBeta || $0.isReleaseCandidate }
     case .release:
-      return provider.feedItems.filter { $0.isRelease }
+      filtered = provider.feedItems.filter { $0.isRelease }
     }
+
+    let query = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard !query.isEmpty else { return filtered }
+
+    return filtered.filter { $0.title?.localizedCaseInsensitiveContains(query) ?? false }
   }
 
   var isLoading: Bool { provider.isLoading }
