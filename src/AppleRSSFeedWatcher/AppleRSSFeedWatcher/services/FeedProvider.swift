@@ -5,11 +5,12 @@
 //  Created by Karin Berg on 19.05.26.
 //
 
+import AppKit
 import Combine
 import Foundation
 import UserNotifications
 
-final class FeedProvider: ObservableObject {
+final class FeedProvider: NSObject, ObservableObject, UNUserNotificationCenterDelegate {
   @Published private(set) var feedItems: [FeedItem] = []
   @Published private(set) var isLoading = false
   @Published private(set) var errorMessage: String?
@@ -21,9 +22,20 @@ final class FeedProvider: ObservableObject {
   private var currentInterval: TimeInterval
   private let notificationCenter = UNUserNotificationCenter.current()
 
+	private let fullDateFormatter: DateFormatter = {
+		let formatter = DateFormatter()
+		formatter.dateStyle = .full
+		formatter.timeStyle = .short
+		return formatter
+	}()
+
   init(feedParser: FeedParser) {
     self.feedParser = feedParser
     self.currentInterval = Self.refreshIntervalFromDefaults()
+
+    super.init()
+
+    notificationCenter.delegate = self
 
     Task { @MainActor in
       do {
@@ -82,15 +94,8 @@ final class FeedProvider: ObservableObject {
     do {
       let newFeedItems = try await feedParser.load()
 
-      if lastFetchDate != nil {
-        let existingIds = Set(feedItems.map(\.id))
-        let addedItems = newFeedItems.filter { !existingIds.contains($0.id) }
-
-        if !addedItems.isEmpty {
-          if await areNotificationsAuthorized() {
-            await sendNotification(addedItems: addedItems)
-          }
-        }
+      if await areNotificationsAuthorized() {
+        await checkForNewItemsAndSendNotifications(newFeedItems)
       }
 
       feedItems = newFeedItems
@@ -104,22 +109,60 @@ final class FeedProvider: ObservableObject {
     await notificationCenter.notificationSettings().authorizationStatus == .authorized
   }
 
-  private func sendNotification(addedItems: [FeedItem]) async {
-    let content = UNMutableNotificationContent()
-    content.title = "New Apple releases"
-    content.body =
-      addedItems.count == 1
-      ? "Apple has released a new update. Check it out!"
-      : "Apple has released \(addedItems.count) new updates. Check them out!"
-    content.sound = UNNotificationSound.default
-    content.userInfo = ["link": "https://developer.apple.com/news/releases/"]
+  private func checkForNewItemsAndSendNotifications(_ newFeedItems: [FeedItem]) async {
+    guard lastFetchDate == nil else { return }
 
-    let request = UNNotificationRequest(identifier: "new-items-\(addedItems.map(\.id).sorted().joined(separator: "-"))", content: content, trigger: nil)
+    let existingIds = Set(feedItems.map(\.id))
+    let addedItems = newFeedItems.filter { !existingIds.contains($0.id) }
+
+    if !addedItems.isEmpty {
+      for item in addedItems {
+        await sendNotification(for: item)
+      }
+    }
+  }
+
+  private func sendNotification(for item: FeedItem) async {
+    let title = item.title ?? "Unkwown"
+    var pubDateString = ""
+    if let pubDate = item.pubDate {
+      pubDateString = fullDateFormatter.string(from: pubDate)
+    }
+    let content = UNMutableNotificationContent()
+
+    content.title = "New Apple release of '\(title)'"
+    content.body = "Apple released a new version of '\(title)' at \(pubDateString)."
+    if let description = item.description {
+      content.subtitle = description
+    }
+    content.sound = UNNotificationSound.default
+    if let link = item.link {
+      content.userInfo = ["link": link]
+    } else {
+      content.userInfo = ["link": "https://developer.apple.com/news/releases/"]
+    }
+
+    let request = UNNotificationRequest(
+      identifier: "new-item-\(item.id)",
+      content: content,
+      trigger: nil
+    )
     do {
       try await notificationCenter.add(request)
     } catch {
       // Ignore for now
     }
+  }
+
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    didReceive response: UNNotificationResponse
+  ) async {
+    guard let linkString = response.notification.request.content.userInfo["link"] as? String,
+          let url = URL(string: linkString)
+    else { return }
+
+    NSWorkspace.shared.open(url)
   }
 
   private static func refreshIntervalFromDefaults() -> TimeInterval {
