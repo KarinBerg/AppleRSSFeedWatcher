@@ -11,6 +11,8 @@ import Foundation
 class FeedItemViewModel: ObservableObject {
   @Published var item: FeedItem
 
+  private static let newEntryAgeThreshold: TimeInterval = 6 * 60 * 60
+
   private static let fullDateFormatter: DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateStyle = .full
@@ -56,6 +58,19 @@ class FeedItemViewModel: ObservableObject {
     }
 
     return Self.fullDateFormatter.string(from: pubDate)
+  }
+
+  var isNew: Bool {
+    isNew(referenceDate: Date())
+  }
+
+  func isNew(referenceDate: Date) -> Bool {
+    guard let pubDate = item.pubDate else {
+      return false
+    }
+
+    let age = referenceDate.timeIntervalSince(pubDate)
+    return age >= 0 && age < Self.newEntryAgeThreshold
   }
 
   private func relativeTime(from date: Date) -> String {

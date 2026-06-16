@@ -15,11 +15,11 @@ struct FeedItemView: View {
     HStack {
       if let link = viewModel.link {
         Link(viewModel.title, destination: link)
-          .font(.system(size: 12, weight: .medium, design: .default))
+          .font(.system(size: 12, weight: titleFontWeight, design: .default))
           .lineLimit(nil)
       } else {
         Text(viewModel.title)
-          .font(.system(size: 12, weight: .medium, design: .default))
+          .font(.system(size: 12, weight: titleFontWeight, design: .default))
           .lineLimit(nil)
       }
 
@@ -37,6 +37,10 @@ struct FeedItemView: View {
 
   init(item: FeedItem) {
     _viewModel = StateObject(wrappedValue: FeedItemViewModel(item: item))
+  }
+
+  private var titleFontWeight: Font.Weight {
+	  viewModel.isNew ? .bold : .regular
   }
 }
 
