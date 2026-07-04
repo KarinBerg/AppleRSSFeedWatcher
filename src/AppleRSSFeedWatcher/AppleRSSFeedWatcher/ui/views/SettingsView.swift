@@ -53,6 +53,7 @@ struct SettingsView: View {
 
 enum SettingsKey {
   static let refreshInterval = "rssRefreshInterval"
+  static let notifiedItemIds = "notifiedItemIds"
 }
 
 #Preview {

@@ -110,16 +110,20 @@ final class FeedProvider: NSObject, ObservableObject, UNUserNotificationCenterDe
   }
 
   private func checkForNewItemsAndSendNotifications(_ newFeedItems: [FeedItem]) async {
-    guard lastFetchDate == nil else { return }
+    let notifiedIds = Set(
+      UserDefaults.standard.stringArray(forKey: SettingsKey.notifiedItemIds) ?? []
+    )
+    let addedItems = newFeedItems.filter { !notifiedIds.contains($0.id) }
 
-    let existingIds = Set(feedItems.map(\.id))
-    let addedItems = newFeedItems.filter { !existingIds.contains($0.id) }
+    guard !addedItems.isEmpty else { return }
 
-    if !addedItems.isEmpty {
-      for item in addedItems {
-        await sendNotification(for: item)
-      }
+    for item in addedItems {
+      await sendNotification(for: item)
     }
+
+    // Persist all known IDs, capped to the current new feed size (+200) to avoid unbounded growth
+    let updatedIds = Array(notifiedIds.union(newFeedItems.map(\.id)).suffix(newFeedItems.count + 200))
+    UserDefaults.standard.set(updatedIds, forKey: SettingsKey.notifiedItemIds)
   }
 
   private func sendNotification(for item: FeedItem) async {
