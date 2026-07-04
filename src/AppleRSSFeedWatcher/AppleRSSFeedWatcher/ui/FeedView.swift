@@ -27,7 +27,7 @@ struct FeedView: View {
 
       FeedStatusBarView(viewModel: viewModel)
     }
-    .frame(minWidth: 300, minHeight: 400)
+    .frame(minWidth: 350, minHeight: 450)
   }
 }
 
