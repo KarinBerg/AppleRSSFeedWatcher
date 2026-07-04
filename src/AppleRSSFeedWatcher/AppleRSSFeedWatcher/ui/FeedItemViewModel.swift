@@ -11,7 +11,7 @@ import Foundation
 class FeedItemViewModel: ObservableObject {
   @Published var item: FeedItem
 
-  private static let newEntryAgeThreshold: TimeInterval = 6 * 60 * 60
+  private static let newEntryAgeThreshold: TimeInterval = 4 * 60 * 60 * 24
 
   private static let fullDateFormatter: DateFormatter = {
     let formatter = DateFormatter()

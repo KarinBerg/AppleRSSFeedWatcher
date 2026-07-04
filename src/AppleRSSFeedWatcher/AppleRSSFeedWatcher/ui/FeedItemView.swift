@@ -15,19 +15,19 @@ struct FeedItemView: View {
     HStack {
       if let link = viewModel.link {
         Link(viewModel.title, destination: link)
-          .font(.system(size: 12, weight: titleFontWeight, design: .default))
+          .font(.system(size: 12, weight: titleFontWeight))
           .lineLimit(nil)
       } else {
         Text(viewModel.title)
-          .font(.system(size: 12, weight: titleFontWeight, design: .default))
+          .font(.system(size: 12, weight: titleFontWeight))
           .lineLimit(nil)
       }
 
       Spacer()
 
       Text(viewModel.relativeDate)
-        .font(.system(size: 10, weight: .light, design: .default))
-        .foregroundColor(.secondary)
+        .font(.system(size: 10, weight: .light))
+        .foregroundColor(viewModel.isNew == true ? Color.green : .secondary)
         .lineLimit(1)
         .help(viewModel.date)
 
@@ -40,7 +40,7 @@ struct FeedItemView: View {
   }
 
   private var titleFontWeight: Font.Weight {
-	  viewModel.isNew ? .bold : .regular
+    viewModel.isNew ? .bold : .regular
   }
 }
 
