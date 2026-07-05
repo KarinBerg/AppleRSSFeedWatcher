@@ -23,9 +23,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0  # 0 = full history + all branches; N = last N commits
 
       - name: Select Xcode
-        run: sudo xcode-select -switch /Applications/Xcode_26.5.app
+        run: sudo xcode-select -switch /Applications/Xcode_26.6.app
 
       - name: Import signing certificate
         env:
@@ -49,6 +51,15 @@ jobs:
           security import "$CERT_PATH" -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN_PATH"
           security set-key-partition-list -S apple-tool:,apple: -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security list-keychain -d user -s "$KEYCHAIN_PATH" login.keychain-db
+
+      - name: Set version and build number
+        run: |
+          set -euo pipefail
+          echo "PROJECT: $PROJECT"
+          export XCCONFIG_DIR="src/AppleRSSFeedWatcher"
+          ./.github/ci/SetVersionAndBuildNumber.sh
+          echo "Content of $XCCONFIG_DIR/Versioning.xcconfig:"
+          cat $XCCONFIG_DIR/Versioning.xcconfig
 
       - name: Archive
         run: |

@@ -28,9 +28,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17084BF92FFAA200006781D4 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		170D99D52FB6049A00168CAA /* AppleRSSFeedWatcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleRSSFeedWatcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		170D99E22FB6049B00168CAA /* AppleRSSFeedWatcherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppleRSSFeedWatcherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		170D99EC2FB6049B00168CAA /* AppleRSSFeedWatcherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppleRSSFeedWatcherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		17FA91A72FFAAF2400E0F6C1 /* Versioning.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Versioning.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -80,6 +82,8 @@
 		170D99CC2FB6049A00168CAA = {
 			isa = PBXGroup;
 			children = (
+				17FA91A72FFAAF2400E0F6C1 /* Versioning.xcconfig */,
+				17084BF92FFAA200006781D4 /* Base.xcconfig */,
 				170D99D72FB6049A00168CAA /* AppleRSSFeedWatcher */,
 				170D99E52FB6049B00168CAA /* AppleRSSFeedWatcherTests */,
 				170D99EF2FB6049B00168CAA /* AppleRSSFeedWatcherUITests */,
@@ -280,6 +284,7 @@
 /* Begin XCBuildConfiguration section */
 		170D99F42FB6049B00168CAA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17084BF92FFAA200006781D4 /* Base.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -344,6 +349,7 @@
 		};
 		170D99F52FB6049B00168CAA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17084BF92FFAA200006781D4 /* Base.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -405,7 +411,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_TEAM = FW7Z27RMMT;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -430,7 +436,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = de.pepperApps.AppleRSSFeedWatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -450,7 +456,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				DEVELOPMENT_TEAM = FW7Z27RMMT;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -475,7 +481,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.6;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = "$(MARKETING_VERSION)";
 				PRODUCT_BUNDLE_IDENTIFIER = de.pepperApps.AppleRSSFeedWatcher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
