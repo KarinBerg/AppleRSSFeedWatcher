@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		178DD5122FFABC170054B3B2 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = 178DD5112FFABC170054B3B2 /* Sparkle */; };
 		17F449142FB63C7C00902788 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 17F449132FB63C7C00902788 /* FeedKit */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17F449142FB63C7C00902788 /* FeedKit in Frameworks */,
+				178DD5122FFABC170054B3B2 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +124,7 @@
 			name = AppleRSSFeedWatcher;
 			packageProductDependencies = (
 				17F449132FB63C7C00902788 /* FeedKit */,
+				178DD5112FFABC170054B3B2 /* Sparkle */,
 			);
 			productName = AppleRSSFeedWatcher;
 			productReference = 170D99D52FB6049A00168CAA /* AppleRSSFeedWatcher.app */;
@@ -207,6 +210,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				17F449122FB63C7C00902788 /* XCRemoteSwiftPackageReference "FeedKit" */,
+				178DD5102FFABC170054B3B2 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 170D99D62FB6049A00168CAA /* Products */;
@@ -616,6 +620,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		178DD5102FFABC170054B3B2 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.4;
+			};
+		};
 		17F449122FB63C7C00902788 /* XCRemoteSwiftPackageReference "FeedKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nmdias/FeedKit";
@@ -627,6 +639,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		178DD5112FFABC170054B3B2 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 178DD5102FFABC170054B3B2 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
 		17F449132FB63C7C00902788 /* FeedKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 17F449122FB63C7C00902788 /* XCRemoteSwiftPackageReference "FeedKit" */;
