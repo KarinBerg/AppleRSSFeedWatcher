@@ -21,5 +21,6 @@ indent_size = 4
 # Tab indentation (no size specified)
 [Makefile, *.swift]
 indent_style = tab
+indent_size = 4
 
 trim_trailing_whitespace = true

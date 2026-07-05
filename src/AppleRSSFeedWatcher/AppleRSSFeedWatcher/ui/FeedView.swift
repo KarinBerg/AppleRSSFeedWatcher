@@ -9,28 +9,28 @@ import SwiftUI
 import os.log
 
 struct FeedView: View {
-  @StateObject private var viewModel: FeedViewModel
+	@StateObject private var viewModel: FeedViewModel
 
-  init(provider: FeedProvider) {
-    _viewModel = StateObject(wrappedValue: FeedViewModel(provider: provider))
-  }
+	init(provider: FeedProvider) {
+		_viewModel = StateObject(wrappedValue: FeedViewModel(provider: provider))
+	}
 
-  var body: some View {
-    VStack(alignment: .center, spacing: 0) {
-      FeedToolbarView(viewModel: viewModel)
+	var body: some View {
+		VStack(alignment: .center, spacing: 0) {
+			FeedToolbarView(viewModel: viewModel)
 
-      Divider()
+			Divider()
 
-      FeedListView(items: viewModel.filteredItems)
+			FeedListView(items: viewModel.filteredItems)
 
-      Divider()
+			Divider()
 
-      FeedStatusBarView(viewModel: viewModel)
-    }
-    .frame(minWidth: 350, minHeight: 450)
-  }
+			FeedStatusBarView(viewModel: viewModel)
+		}
+		.frame(minWidth: 350, minHeight: 450)
+	}
 }
 
 #Preview {
-  FeedView(provider: FeedProvider(feedParser: FeedParser(feedUrl: URL(string: rssLink)!)))
+	FeedView(provider: FeedProvider(feedParser: FeedParser(feedUrl: URL(string: rssLink)!)))
 }

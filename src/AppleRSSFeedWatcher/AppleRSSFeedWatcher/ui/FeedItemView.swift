@@ -9,42 +9,42 @@ import Combine
 import SwiftUI
 
 struct FeedItemView: View {
-  @StateObject private var viewModel: FeedItemViewModel
+	@StateObject private var viewModel: FeedItemViewModel
 
-  var body: some View {
-    HStack {
-      if let link = viewModel.link {
-        Link(viewModel.title, destination: link)
-          .font(.system(size: 12, weight: titleFontWeight))
-          .lineLimit(nil)
-      } else {
-        Text(viewModel.title)
-          .font(.system(size: 12, weight: titleFontWeight))
-          .lineLimit(nil)
-      }
+	var body: some View {
+		HStack {
+			if let link = viewModel.link {
+				Link(viewModel.title, destination: link)
+					.font(.system(size: 12, weight: titleFontWeight))
+					.lineLimit(nil)
+			} else {
+				Text(viewModel.title)
+					.font(.system(size: 12, weight: titleFontWeight))
+					.lineLimit(nil)
+			}
 
-      Spacer()
+			Spacer()
 
-      Text(viewModel.relativeDate)
-        .font(.system(size: 10, weight: .light))
-        .foregroundColor(viewModel.isNew == true ? Color.green : .secondary)
-        .lineLimit(1)
-        .help(viewModel.date)
+			Text(viewModel.relativeDate)
+				.font(.system(size: 10, weight: .light))
+				.foregroundColor(viewModel.isNew == true ? Color.green : .secondary)
+				.lineLimit(1)
+				.help(viewModel.date)
 
-    }
-    .padding([.vertical], 4)
-  }
+		}
+		.padding([.vertical], 4)
+	}
 
-  init(item: FeedItem) {
-    _viewModel = StateObject(wrappedValue: FeedItemViewModel(item: item))
-  }
+	init(item: FeedItem) {
+		_viewModel = StateObject(wrappedValue: FeedItemViewModel(item: item))
+	}
 
-  private var titleFontWeight: Font.Weight {
-    viewModel.isNew ? .bold : .regular
-  }
+	private var titleFontWeight: Font.Weight {
+		viewModel.isNew ? .bold : .regular
+	}
 }
 
 #Preview {
-  let item = FeedItem(id: "2", title: "title", link: "", description: "", pubDate: Date.now)
-  FeedItemView(item: item)
+	let item = FeedItem(id: "2", title: "title", link: "", description: "", pubDate: Date.now)
+	FeedItemView(item: item)
 }
