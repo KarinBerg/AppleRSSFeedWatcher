@@ -55,7 +55,6 @@ jobs:
       - name: Set version and build number
         run: |
           set -euo pipefail
-          echo "PROJECT: $PROJECT"
           export XCCONFIG_DIR="src/AppleRSSFeedWatcher"
           ./.github/ci/SetVersionAndBuildNumber.sh
           echo "Content of $XCCONFIG_DIR/Versioning.xcconfig:"
@@ -89,7 +88,6 @@ jobs:
           set -euo pipefail
           APP="$RUNNER_TEMP/export/AppleRSSFeedWatcher.app"
           codesign --verify --deep --strict --verbose=2 "$APP"
-          codesign --display --verbose=4 "$APP"
 
       - name: Collect debug symbols (dSYMs)
         run: |
@@ -136,7 +134,8 @@ jobs:
           set -euo pipefail
           brew install create-dmg
           APP="$RUNNER_TEMP/export/AppleRSSFeedWatcher.app"
-          DMG="$RUNNER_TEMP/export/AppleRSSFeedWatcher.dmg"
+          mkdir -p "$RUNNER_TEMP/export/dmg"
+          DMG="$RUNNER_TEMP/export/dmg/AppleRSSFeedWatcher.dmg"
 
           # Build a drag-to-install DMG: the app on the left, an
           # Applications symlink on the right.
@@ -154,9 +153,10 @@ jobs:
       - name: Sign DMG
         run: |
           set -euo pipefail
+          DMG="$RUNNER_TEMP/export/dmg/AppleRSSFeedWatcher.dmg"
           codesign --force --sign "Developer ID Application" --timestamp \
-            "$RUNNER_TEMP/export/AppleRSSFeedWatcher.dmg"
-          codesign --verify --verbose=2 "$RUNNER_TEMP/export/AppleRSSFeedWatcher.dmg"
+            "$DMG"
+          codesign --verify --verbose=2 "$DMG"
 
       - name: Notarize and staple DMG
         env:
@@ -164,7 +164,7 @@ jobs:
           APPLE_API_ISSUER_ID: ${{ secrets.APPLE_API_ISSUER_ID }}
         run: |
           set -euo pipefail
-          DMG="$RUNNER_TEMP/export/AppleRSSFeedWatcher.dmg"
+          DMG="$RUNNER_TEMP/export/dmg/AppleRSSFeedWatcher.dmg"
 
           xcrun notarytool submit "$DMG" \
             --key "$RUNNER_TEMP/api_key.p8" \
@@ -176,11 +176,25 @@ jobs:
           xcrun stapler staple "$DMG"
           xcrun stapler validate "$DMG"
 
+      - name: Sign DMG with Sparkle Ed25519 private key
+        env:
+          SPARKLE_ED25519_PRIVATE_KEY: ${{ secrets.SPARKLE_ED25519_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          echo "$SPARKLE_ED25519_PRIVATE_KEY" | ./.github/ci/sparkle/sign_update --ed-key-file - ${{ runner.temp }}/export/dmg/AppleRSSFeedWatcher.dmg
+
+      - name: Create appcast.xml for Sparkle
+        env:
+          SPARKLE_ED25519_PRIVATE_KEY: ${{ secrets.SPARKLE_ED25519_PRIVATE_KEY }}
+        run: |
+          set -euo pipefail
+          echo "$SPARKLE_ED25519_PRIVATE_KEY" | ./.github/ci/sparkle/generate_appcast --link https://github.com/KarinBerg/AppleRSSFeedWatcher --download-url-prefix https://github.com/KarinBerg/AppleRSSFeedWatcher/releases/latest/download/ --ed-key-file - ${{ runner.temp }}/export/dmg/
+
       - name: Upload DMG artifact
         uses: actions/upload-artifact@v7
         with:
           name: AppleRSSFeedWatcher-dmg
-          path: ${{ runner.temp }}/export/AppleRSSFeedWatcher.dmg
+          path: ${{ runner.temp }}/export/dmg/AppleRSSFeedWatcher.dmg
 
       - name: Upload dSYMs artifact
         uses: actions/upload-artifact@v7
@@ -188,11 +202,29 @@ jobs:
           name: AppleRSSFeedWatcher-dSYMs
           path: ${{ runner.temp }}/export/AppleRSSFeedWatcher-dSYMs.zip
 
+      - name: Upload appcast.xml artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: appcast-xml
+          path: ${{ runner.temp }}/export/dmg/appcast.xml
+
       - name: Attach DMG to release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v3
         with:
-          files: ${{ runner.temp }}/export/AppleRSSFeedWatcher.dmg
+          files: ${{ runner.temp }}/export/dmg/AppleRSSFeedWatcher.dmg
+
+      - name: Attach dSYMs to release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v3
+        with:
+          files: ${{ runner.temp }}/export/AppleRSSFeedWatcher-dSYMs.zip
+      
+      - name: Attach appcast.xml to release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v3
+        with:
+          files: ${{ runner.temp }}/export/dmg/appcast.xml
 
       - name: Clean up secrets
         if: always()

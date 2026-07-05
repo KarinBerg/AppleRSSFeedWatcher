@@ -18,6 +18,8 @@ struct OptionMenuButton: View {
 				])
 			}
 
+			CheckForUpdatesView()
+
 			SettingsLink {
 				Text("Settings...")
 			}
