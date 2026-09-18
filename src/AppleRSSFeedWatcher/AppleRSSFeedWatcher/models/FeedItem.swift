@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FeedItem: Identifiable {
+struct FeedItem: Identifiable, Codable {
 	public let id: String
 	let title: String?
 	let link: String?
@@ -28,6 +28,22 @@ struct FeedItem: Identifiable {
 		self.isBeta = Self.isBeta(title: title)
 		self.isReleaseCandidate = Self.isReleaseCandidate(title: title)
 		self.isRelease = !isBeta && !isReleaseCandidate
+	}
+
+	// The classification flags are derived from the title, so only the raw values are persisted.
+	private enum CodingKeys: String, CodingKey {
+		case id, title, link, description, pubDate
+	}
+
+	init(from decoder: Decoder) throws {
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		self.init(
+			id: try container.decode(String.self, forKey: .id),
+			title: try container.decodeIfPresent(String.self, forKey: .title) ?? "",
+			link: try container.decodeIfPresent(String.self, forKey: .link),
+			description: try container.decodeIfPresent(String.self, forKey: .description),
+			pubDate: try container.decodeIfPresent(Date.self, forKey: .pubDate)
+		)
 	}
 }
 

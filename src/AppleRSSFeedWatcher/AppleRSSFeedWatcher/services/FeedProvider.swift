@@ -17,6 +17,7 @@ final class FeedProvider: NSObject, ObservableObject, UNUserNotificationCenterDe
 	@Published private(set) var lastFetchDate: Date?
 
 	private let feedParser: FeedParser
+	private let feedCache: FeedCache
 	private var refreshTask: Task<Void, Never>?
 	private var cancellables = Set<AnyCancellable>()
 	private var currentInterval: TimeInterval
@@ -29,11 +30,17 @@ final class FeedProvider: NSObject, ObservableObject, UNUserNotificationCenterDe
 		return formatter
 	}()
 
-	init(feedParser: FeedParser) {
+	init(feedParser: FeedParser, feedCache: FeedCache = FeedCache()) {
 		self.feedParser = feedParser
+		self.feedCache = feedCache
 		self.currentInterval = Self.refreshIntervalFromDefaults()
 
 		super.init()
+
+		if let cached = feedCache.load() {
+			feedItems = cached.items
+			lastFetchDate = cached.fetchDate
+		}
 
 		notificationCenter.delegate = self
 
@@ -98,8 +105,10 @@ final class FeedProvider: NSObject, ObservableObject, UNUserNotificationCenterDe
 				await checkForNewItemsAndSendNotifications(newFeedItems)
 			}
 
+			let fetchDate = Date()
 			feedItems = newFeedItems
-			lastFetchDate = Date()
+			lastFetchDate = fetchDate
+			feedCache.save(items: newFeedItems, fetchDate: fetchDate)
 		} catch {
 			errorMessage = error.localizedDescription
 		}
