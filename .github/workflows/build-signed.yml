@@ -179,19 +179,33 @@ jobs:
           xcrun stapler staple "$DMG"
           xcrun stapler validate "$DMG"
 
+      - name: Download and verify Sparkle tools
+        run: |
+          set -euo pipefail
+          SPARKLE_VERSION=2.10.0
+          SPARKLE_SHA256=17e28312b8e18ab7cdbbe09a6fb28cc55a5479ec6c371dbc07cdecd2a14fd959
+          
+          # Keep the download out of the checked-out workspace.
+          SPARKLE_ZIP="$RUNNER_TEMP/sparkle.zip"
+
+          curl -fsSL -o "$SPARKLE_ZIP" \
+            "https://github.com/sparkle-project/Sparkle/releases/download/${SPARKLE_VERSION}/Sparkle-for-Swift-Package-Manager.zip"
+          echo "${SPARKLE_SHA256}  ${SPARKLE_ZIP}" | shasum -a 256 -c -
+          unzip -q "$SPARKLE_ZIP" -d "$RUNNER_TEMP/sparkle-tools"
+
       - name: Sign DMG with Sparkle Ed25519 private key
         env:
           SPARKLE_ED25519_PRIVATE_KEY: ${{ secrets.SPARKLE_ED25519_PRIVATE_KEY }}
         run: |
           set -euo pipefail
-          echo "$SPARKLE_ED25519_PRIVATE_KEY" | ./.github/ci/sparkle/sign_update --ed-key-file - ${{ runner.temp }}/export/dmg/AppleRSSFeedWatcher.dmg
+          echo "$SPARKLE_ED25519_PRIVATE_KEY" | $RUNNER_TEMP/sparkle-tools/bin/sign_update --ed-key-file - ${{ runner.temp }}/export/dmg/AppleRSSFeedWatcher.dmg
 
       - name: Create appcast.xml for Sparkle
         env:
           SPARKLE_ED25519_PRIVATE_KEY: ${{ secrets.SPARKLE_ED25519_PRIVATE_KEY }}
         run: |
           set -euo pipefail
-          echo "$SPARKLE_ED25519_PRIVATE_KEY" | ./.github/ci/sparkle/generate_appcast --link https://github.com/KarinBerg/AppleRSSFeedWatcher --download-url-prefix https://github.com/KarinBerg/AppleRSSFeedWatcher/releases/latest/download/ --ed-key-file - ${{ runner.temp }}/export/dmg/
+          echo "$SPARKLE_ED25519_PRIVATE_KEY" | $RUNNER_TEMP/sparkle-tools/bin/generate_appcast --link https://github.com/KarinBerg/AppleRSSFeedWatcher --download-url-prefix https://github.com/KarinBerg/AppleRSSFeedWatcher/releases/latest/download/ --ed-key-file - ${{ runner.temp }}/export/dmg/
 
       - name: Upload DMG artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
