@@ -132,17 +132,34 @@ jobs:
           xcrun stapler staple "$APP"
           xcrun stapler validate "$APP"
 
+      # Pinned to a commit instead of `brew install create-dmg`: this job holds the
+      # Developer ID, App Store Connect and Sparkle private keys, so nothing it runs
+      # should come from an unpinned network install.
+      - name: Install create-dmg (pinned)
+        run: |
+          set -euo pipefail
+          CREATE_DMG_VERSION=v1.3.0
+          CREATE_DMG_COMMIT=a2b71d0fda6d0df2a86dc7f67082d4d73e84c59f
+
+          git clone --quiet --depth 1 --branch "$CREATE_DMG_VERSION" \
+            https://github.com/create-dmg/create-dmg.git "$RUNNER_TEMP/create-dmg"
+
+          ACTUAL_COMMIT="$(git -C "$RUNNER_TEMP/create-dmg" rev-parse HEAD)"
+          if [ "$ACTUAL_COMMIT" != "$CREATE_DMG_COMMIT" ]; then
+            echo "::error::create-dmg commit mismatch: expected $CREATE_DMG_COMMIT, got $ACTUAL_COMMIT"
+            exit 1
+          fi
+
       - name: Create DMG
         run: |
           set -euo pipefail
-          brew install create-dmg
           APP="$RUNNER_TEMP/export/AppleRSSFeedWatcher.app"
           mkdir -p "$RUNNER_TEMP/export/dmg"
           DMG="$RUNNER_TEMP/export/dmg/AppleRSSFeedWatcher.dmg"
 
           # Build a drag-to-install DMG: the app on the left, an
           # Applications symlink on the right.
-          create-dmg \
+          "$RUNNER_TEMP/create-dmg/create-dmg" \
             --volname "AppleRSSFeedWatcher" \
             --window-pos 200 120 \
             --window-size 600 400 \
