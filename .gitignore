@@ -61,3 +61,13 @@ fastlane/Preview.html
 fastlane/screenshots/**/*.png
 fastlane/test_output
 .DS_Store
+
+# Signing / credential material — never commit
+*.p12
+*.cer
+*.pem
+*.p8
+*.mobileprovision
+*.provisionprofile
+.env
+.env.*
