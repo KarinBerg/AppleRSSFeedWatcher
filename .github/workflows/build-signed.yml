@@ -3,6 +3,9 @@ name: Build Signed App
 # Runs only on tag pushes (e.g. v1.0.0) and manual dispatch.
 # NOT on pull requests — secrets are never exposed to fork PRs, and we
 # don't want signing to run for untrusted code in a public repo.
+
+# IMPORTANT: Pin used actions to a specific commit SHA to avoid supply-chain attacks. See https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions#using-third-party-actions
+
 on:
   push:
     tags:
@@ -22,7 +25,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
         with:
           fetch-depth: 0  # 0 = full history + all branches; N = last N commits
 
@@ -191,38 +194,38 @@ jobs:
           echo "$SPARKLE_ED25519_PRIVATE_KEY" | ./.github/ci/sparkle/generate_appcast --link https://github.com/KarinBerg/AppleRSSFeedWatcher --download-url-prefix https://github.com/KarinBerg/AppleRSSFeedWatcher/releases/latest/download/ --ed-key-file - ${{ runner.temp }}/export/dmg/
 
       - name: Upload DMG artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
         with:
           name: AppleRSSFeedWatcher-dmg
           path: ${{ runner.temp }}/export/dmg/AppleRSSFeedWatcher.dmg
 
       - name: Upload dSYMs artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
         with:
           name: AppleRSSFeedWatcher-dSYMs
           path: ${{ runner.temp }}/export/AppleRSSFeedWatcher-dSYMs.zip
 
       - name: Upload appcast.xml artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a #v7.0.1
         with:
           name: appcast-xml
           path: ${{ runner.temp }}/export/dmg/appcast.xml
 
       - name: Attach DMG to release
         if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 #v3.0.3
         with:
           files: ${{ runner.temp }}/export/dmg/AppleRSSFeedWatcher.dmg
 
       - name: Attach dSYMs to release
         if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 #v3.0.3
         with:
           files: ${{ runner.temp }}/export/AppleRSSFeedWatcher-dSYMs.zip
       
       - name: Attach appcast.xml to release
         if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 #v3.0.3
         with:
           files: ${{ runner.temp }}/export/dmg/appcast.xml
 
