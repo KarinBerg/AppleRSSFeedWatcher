@@ -91,7 +91,7 @@ jobs:
       if: matrix.build-mode == 'manual'
       shell: bash
       run: |
-        xcodebuild -project src/AppleRSSFeedWatcher/AppleRSSFeedWatcher.xcodeproj -scheme AppleRSSFeedWatcher build
+        xcodebuild -project src/AppleRSSFeedWatcher/AppleRSSFeedWatcher.xcodeproj -scheme AppleRSSFeedWatcher test
         exit 0
 
     - name: Perform CodeQL Analysis
