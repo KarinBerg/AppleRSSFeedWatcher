@@ -90,10 +90,7 @@ jobs:
       if: matrix.build-mode == 'manual'
       shell: bash
       run: |
-        echo 'If you are using a "manual" build mode for one or more of the' \
-          'languages you are analyzing, replace this with the commands to build' \
-          'your code, for example:'
-        echo '  xcodebuild -project src/AppleRSSFeedWatcher/AppleRSSFeedWatcher.xcodeproj -scheme AppleRSSFeedWatcher build'
+        xcodebuild -project src/AppleRSSFeedWatcher/AppleRSSFeedWatcher.xcodeproj -scheme AppleRSSFeedWatcher build
         exit 0
 
     - name: Perform CodeQL Analysis
