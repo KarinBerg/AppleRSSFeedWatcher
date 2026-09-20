@@ -24,7 +24,7 @@ Then build and run the `AppleRSSFeedWatcher` scheme, or from the command line:
 
 ```sh
 xcodebuild -project src/AppleRSSFeedWatcher/AppleRSSFeedWatcher.xcodeproj \
-           -scheme AppleRSSFeedWatcher test
+           -scheme AppleRSSFeedWatcher build
 ```
 
 ## Releases
