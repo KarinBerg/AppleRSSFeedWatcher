@@ -11,8 +11,11 @@ import SwiftUI
 struct SettingsView: View {
 	@AppStorage(SettingsKey.refreshInterval) private var refreshInterval: TimeInterval = rssRefreshInterval
 	@State private var launchAtLogin: Bool = SMAppService.mainApp.status == .enabled
+	@Environment(AppUpdater.self) private var updater
 
 	var body: some View {
+		@Bindable var updater = updater
+
 		Form {
 			Picker("Refresh feed every:", selection: $refreshInterval) {
 				#if DEBUG
@@ -23,6 +26,12 @@ struct SettingsView: View {
 				Text("1 hour").tag(TimeInterval(60 * 60))
 				Text("2 hours").tag(TimeInterval(2 * 60 * 60))
 				Text("6 hours").tag(TimeInterval(6 * 60 * 60))
+			}
+
+			Picker("Check for updates:", selection: $updater.updateCheckInterval) {
+				Text("Daily").tag(UpdateCheckInterval.daily)
+				Text("Weekly").tag(UpdateCheckInterval.weekly)
+				Text("Off").tag(UpdateCheckInterval.off)
 			}
 
 			Toggle(
@@ -57,5 +66,5 @@ enum SettingsKey {
 }
 
 #Preview {
-	SettingsView()
+	SettingsView().environment(AppUpdater())
 }

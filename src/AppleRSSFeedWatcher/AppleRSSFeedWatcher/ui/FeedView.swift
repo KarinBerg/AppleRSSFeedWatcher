@@ -32,5 +32,6 @@ struct FeedView: View {
 }
 
 #Preview {
-	FeedView(provider: FeedProvider(feedParser: FeedParser(feedUrl: URL(string: rssLink)!)))
+	let updater = AppUpdater()
+	FeedView(provider: FeedProvider(feedParser: FeedParser(feedUrl: URL(string: rssLink)!), appUpdater: updater)).environment(updater)
 }

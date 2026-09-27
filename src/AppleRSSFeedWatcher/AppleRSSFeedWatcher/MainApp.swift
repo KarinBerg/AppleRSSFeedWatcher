@@ -12,21 +12,30 @@ let rssRefreshInterval: TimeInterval = 60 * 60
 
 @main
 struct MainApp: App {
-	private let feedProvider = FeedProvider(
-		feedParser: FeedParser(feedUrl: URL(string: rssLink)!)
-	)
+	@State private var updater: AppUpdater
+
+	private let feedProvider: FeedProvider
+
+	init() {
+		let updater = AppUpdater()
+		_updater = State(initialValue: updater)
+		feedProvider = FeedProvider(
+			feedParser: FeedParser(feedUrl: URL(string: rssLink)!),
+			appUpdater: updater
+		)
+	}
 
 	var body: some Scene {
 		MenuBarExtra(
 			"Apple RSS Feed",
 			image: "StatusBarIcon"
 		) {
-			FeedView(provider: feedProvider)
+			FeedView(provider: feedProvider).environment(updater)
 		}
 		.menuBarExtraStyle(.window)
 
 		Settings {
-			SettingsView()
+			SettingsView().environment(updater)
 		}
 	}
 }

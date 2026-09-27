@@ -18,6 +18,8 @@ struct OptionMenuButton: View {
 				])
 			}
 
+			CheckForUpdatesView()
+
 			SettingsLink {
 				Text("Settings...")
 			}
@@ -111,5 +113,5 @@ struct OptionMenuButton: View {
 }
 
 #Preview {
-	OptionMenuButton()
+	OptionMenuButton().environment(AppUpdater())
 }
