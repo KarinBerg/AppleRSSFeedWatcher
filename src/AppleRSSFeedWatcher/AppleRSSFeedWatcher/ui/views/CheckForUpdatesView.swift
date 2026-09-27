@@ -15,3 +15,7 @@ struct CheckForUpdatesView: View {
 			.disabled(!updater.canCheckForUpdates)
 	}
 }
+
+#Preview {
+	CheckForUpdatesView().environment(AppUpdater())
+}

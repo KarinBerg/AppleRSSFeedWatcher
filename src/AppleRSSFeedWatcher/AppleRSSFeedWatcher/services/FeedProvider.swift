@@ -18,6 +18,7 @@ final class FeedProvider: NSObject, ObservableObject, UNUserNotificationCenterDe
 
 	private let feedParser: FeedParser
 	private let feedCache: FeedCache
+	private let appUpdater: AppUpdater
 	private var refreshTask: Task<Void, Never>?
 	private var cancellables = Set<AnyCancellable>()
 	private var currentInterval: TimeInterval
@@ -30,9 +31,10 @@ final class FeedProvider: NSObject, ObservableObject, UNUserNotificationCenterDe
 		return formatter
 	}()
 
-	init(feedParser: FeedParser, feedCache: FeedCache = FeedCache()) {
+	init(feedParser: FeedParser, feedCache: FeedCache = FeedCache(), appUpdater: AppUpdater) {
 		self.feedParser = feedParser
 		self.feedCache = feedCache
+		self.appUpdater = appUpdater
 		self.currentInterval = Self.refreshIntervalFromDefaults()
 
 		super.init()
@@ -171,6 +173,11 @@ final class FeedProvider: NSObject, ObservableObject, UNUserNotificationCenterDe
 		_ center: UNUserNotificationCenter,
 		didReceive response: UNNotificationResponse
 	) async {
+		if response.notification.request.identifier == AppUpdater.updateNotificationIdentifier {
+			appUpdater.checkForUpdates()
+			return
+		}
+
 		guard let linkString = response.notification.request.content.userInfo["link"] as? String,
 					let url = URL(string: linkString)
 		else { return }

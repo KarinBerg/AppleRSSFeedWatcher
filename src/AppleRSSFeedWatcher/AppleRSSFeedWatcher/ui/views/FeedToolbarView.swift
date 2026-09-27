@@ -97,5 +97,6 @@ struct FeedToolbarView: View {
 }
 
 #Preview {
-	FeedToolbarView(viewModel: FeedViewModel(provider: FeedProvider(feedParser: FeedParser(feedUrl: URL(string: rssLink)!))))
+	let updater = AppUpdater()
+	FeedToolbarView(viewModel: FeedViewModel(provider: FeedProvider(feedParser: FeedParser(feedUrl: URL(string: rssLink)!), appUpdater: updater))).environment(updater)
 }

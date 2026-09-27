@@ -113,5 +113,5 @@ struct OptionMenuButton: View {
 }
 
 #Preview {
-	OptionMenuButton()
+	OptionMenuButton().environment(AppUpdater())
 }
